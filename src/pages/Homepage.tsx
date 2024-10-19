@@ -26,7 +26,7 @@ import {
   Activity,
 } from "lucide-react";
 
-export default function HomePage() {
+export default function Homepage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
@@ -270,7 +270,7 @@ export default function HomePage() {
                 >
                   <div className="flex items-start space-x-4">
                     <Avatar>
-                      <AvatarImage src={report.avatar} alt={report.user} />
+                      {/* <AvatarImage src={report.avatar} alt={report.user} /> */}
                       <AvatarFallback>
                         {report.user.slice(0, 2).toUpperCase()}
                       </AvatarFallback>
