@@ -1,11 +1,18 @@
-'use client';
+"use client";
 
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { useState } from 'react';
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useState } from "react";
 
 // Define the IUser interface
 interface IUser {
@@ -22,18 +29,23 @@ interface SignUpFormInputs {
 }
 
 export default function SignUpForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormInputs>();
-  const [responseMessage, setResponseMessage] = useState<string>('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormInputs>();
+  const [responseMessage, setResponseMessage] = useState<string>("");
 
   // Define the submit handler with the correct type
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (formData) => {
     const userData: IUser = { ...formData };
 
     try {
-      const response = await fetch('/api/users/createProfile', { // Replace with your actual API endpoint
-        method: 'POST',
+      const response = await fetch("/api/users/createProfile", {
+        // Replace with your actual API endpoint
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
@@ -46,8 +58,8 @@ export default function SignUpForm() {
         setResponseMessage(result.message);
       }
     } catch (error) {
-      console.error('Error during signup:', error);
-      setResponseMessage('An error occurred. Please try again.');
+      console.error("Error during signup:", error);
+      setResponseMessage("An error occurred. Please try again.");
     }
   };
 
@@ -59,49 +71,65 @@ export default function SignUpForm() {
       </CardHeader>
       <CardContent>
         <form className="space-y-4">
-          {responseMessage && <p className={`text-${responseMessage.includes('success') ? 'green' : 'red'}-500`}>{responseMessage}</p>}
-          
+          {responseMessage && (
+            <p
+              className={`text-${
+                responseMessage.includes("success") ? "green" : "red"
+              }-500`}
+            >
+              {responseMessage}
+            </p>
+          )}
+
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
-            <Input 
+            <Input
               id="name"
-              {...register('name', { required: 'Name is required' })}
+              {...register("name", { required: "Name is required" })}
               placeholder="Your name"
             />
-            {errors.name && <p className="text-red-500">{(errors.name.message as string)}</p>}
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message as string}</p>
+            )}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
-              {...register('email', {
-                required: 'Email is required',
+              {...register("email", {
+                required: "Email is required",
                 pattern: {
                   value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                  message: 'Email is not valid',
+                  message: "Email is not valid",
                 },
               })}
               placeholder="abc@zyz.com"
             />
-            {errors.email && <p className="text-red-500">{(errors.email.message as string)}</p>}
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message as string}</p>
+            )}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
-              {...register('password', { required: 'Password is required' })}
+              {...register("password", { required: "Password is required" })}
               type="password"
               placeholder="••••••••"
             />
-            {errors.password && <p className="text-red-500">{(errors.password.message as string)}</p>}
+            {errors.password && (
+              <p className="text-red-500">
+                {errors.password.message as string}
+              </p>
+            )}
           </div>
 
           <Button
             type="button"
             className="w-full"
-            onClick={handleSubmit(onSubmit)}  // Properly call handleSubmit with onSubmit
+            onClick={handleSubmit(onSubmit)} // Properly call handleSubmit with onSubmit
           >
             Sign Up
           </Button>
@@ -109,7 +137,10 @@ export default function SignUpForm() {
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-muted-foreground">
-          Already have an account? <a href="#" className="text-primary hover:underline">Log in</a>
+          Already have an account?{" "}
+          <a href="#" className="text-primary hover:underline">
+            Log in
+          </a>
         </p>
       </CardFooter>
     </Card>

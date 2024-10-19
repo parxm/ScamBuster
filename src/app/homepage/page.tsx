@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Bell,
   ThumbsUp,
@@ -22,11 +22,10 @@ import {
   MapPin,
   Users,
   Shield,
-  TrendingUp,
   Activity,
 } from "lucide-react";
 
-export default function Homepage() {
+export default function page() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">

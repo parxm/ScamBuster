@@ -20,7 +20,7 @@ export default async function handler(
       });
 
       res.status(201).json(newComment);
-    } catch (error) {
+    } catch (e) {
       res.status(500).json({ message: "Error adding comment" });
     }
   } else {
