@@ -20,46 +20,50 @@ export default function Home() {
           <span className="sr-only">Scam Awareness Platform</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
+          {/* Using anchor links for internal sections */}
           <Link
-            href="#"
+            href="#features"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
             Features
           </Link>
           <Link
-            href="#"
+            href="#testimonials"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
             Testimonials
           </Link>
           <Link
-            href="#"
+            href="#about"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
             About
           </Link>
           <Link
-            href="#"
+            href="#contact"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
             Contact
           </Link>
 
-          <Button>
-            Login{" "}
-            <span className="ml-3">
-              <CiLogin className="h-5 w-5" />
-            </span>
-          </Button>
+          {/* Navigate to Sign Up page on Login button click */}
+          <Link href="/sign-up" passHref>
+            <Button>
+              Login{" "}
+              <span className="ml-3">
+                <CiLogin className="h-5 w-5" />
+              </span>
+            </Button>
+          </Link>
         </nav>
       </header>
 
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+        <section id="features" className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
@@ -74,14 +78,14 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link
-                    href="#"
+                    href="/sign-up"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
                     Sign Up
                   </Link>
                   <Link
-                    href="#"
+                    href="#learn-more"
                     className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
@@ -99,7 +103,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+
+        <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container px-4 md:px-6">
             <div className="grid items-center gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_550px]">
               <div className="flex flex-col justify-center space-y-4">
@@ -111,9 +116,7 @@ export default function Home() {
                     Travel Safely with Scam Awareness
                   </h2>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Get up-to-date user-generated scam reports, personalized
-                    travel plan alerts, and engage with a supportive community
-                    to stay informed and protected.
+                    Get up-to-date user-generated scam reports, personalized travel plan alerts, and engage with a supportive community to stay informed and protected.
                   </p>
                 </div>
                 <ul className="grid gap-2 py-4">
@@ -132,14 +135,14 @@ export default function Home() {
                 </ul>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link
-                    href="#"
+                    href="/signup"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
                     Sign Up
                   </Link>
                   <Link
-                    href="#"
+                    href="#learn-more"
                     className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
@@ -157,15 +160,15 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
+
+        <section id="about" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                 Trusted by Travelers Worldwide
               </h2>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Hear from our users about how Scam Awareness has helped them
-                travel with confidence.
+                Hear from our users about how Scam Awareness has helped them travel with confidence.
               </p>
             </div>
             <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -186,9 +189,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <blockquote className="text-muted-foreground">
-                    "Scam Awareness has been a game-changer for my travels. The
-                    real-time scam reports and personalized alerts have saved me
-                    from several potentially costly situations."
+                    "Scam Awareness has been a game-changer for my travels. The real-time scam reports and personalized alerts have saved me from several potentially costly situations."
                   </blockquote>
                 </CardContent>
               </Card>
@@ -196,6 +197,7 @@ export default function Home() {
                 <CardHeader>
                   <div className="flex items-center space-x-4">
                     <Avatar>
+                                          
                       <AvatarImage />
                       <AvatarFallback>SM</AvatarFallback>
                     </Avatar>
@@ -209,9 +211,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <blockquote className="text-muted-foreground">
-                    "As a solo traveler, I've found the Scam Awareness community
-                    to be an invaluable resource. The support and insights have
-                    helped me navigate tricky situations with confidence."
+                    "As a solo traveler, I've found the Scam Awareness community to be an invaluable resource. The support and insights have helped me navigate tricky situations with confidence."
                   </blockquote>
                 </CardContent>
               </Card>
@@ -232,9 +232,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <blockquote className="text-muted-foreground">
-                    "I've traveled for work for years, and I've never felt more
-                    secure than I do now with Scam Awareness. The alerts help me
-                    stay one step ahead!"
+                    "I've traveled for work for years, and I've never felt more secure than I do now with Scam Awareness. The alerts help me stay one step ahead!"
                   </blockquote>
                 </CardContent>
               </Card>
@@ -255,9 +253,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <blockquote className="text-muted-foreground">
-                    "Traveling with my kids can be stressful, but Scam Awareness
-                    has given me peace of mind. I feel like I have a safety net
-                    while exploring new places."
+                    "Traveling with my kids can be stressful, but Scam Awareness has given me peace of mind. I feel like I have a safety net while exploring new places."
                   </blockquote>
                 </CardContent>
               </Card>
@@ -266,14 +262,14 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="py-4 bg-muted">
+      <footer id="contact" className="py-4 bg-muted">
         <div className="container px-4 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Scam Awareness Platform. All rights
-            reserved.
+            © {new Date().getFullYear()} Scam Awareness Platform. All rights reserved.
           </p>
         </div>
       </footer>
     </div>
   );
 }
+

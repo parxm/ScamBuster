@@ -1,46 +1,99 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Toaster } from "@/components/ui/toaster";
-import { Toast } from "@/components/ui/toast"
+import { Toast } from "@/components/ui/toast";
 
 
-// Mock initial user data
-const initialUserData = {
-  username: "alice_dev",
-  name: "Alice Johnson",
-  bio: "Full-stack developer | Open source enthusiast | Coffee lover",
-  profession: "Software Engineer",
-  avatar: "/placeholder.svg?height=200&width=200",
+
+interface ToastProps {
+  title: string;
+  description?: string;
 }
 
-export default function WiderEditProfilePage() {
-  const [userData, setUserData] = useState(initialUserData)
+
+const initialUserData = {
+  username: "Parampreet Singh",
+  name: "parxm",
+  bio: "Full-stack developer ",
+  profession: "Software Engineer",
+  avatar: "/placeholder.svg?height=200&width=200",
+};
+
+export default function EditProfilePage() {
+  const [userData, setUserData] = useState(initialUserData);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setUserData(prevData => ({
       ...prevData,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically send the updated data to your backend
-    console.log("Updated user data:", userData)
-    Toast({
-      title: "Profile Updated",
-      description: "Your profile has been successfully updated.",
-    })
-  }
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImageFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append("userId", "user_id_here"); 
+    formData.append("username", userData.username);
+    formData.append("name", userData.name);
+    formData.append("bio", userData.bio);
+    formData.append("profession", userData.profession);
+    
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    try {
+      const response = await fetch("/api/editProfile", {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        Toast({
+          title: "Profile Updated",
+          description: "Your profile has been successfully updated.",
+        });
+        setUserData(data.user); // Update local user data with response
+      } else {
+        const errorData = await response.json();
+        Toast({
+          title: "Error",
+          description: errorData.message || "An error occurred while updating your profile.",
+        });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      Toast({
+        title: "Error",
+        description: "An error occurred while updating your profile.",
+      });
+    }
+  };
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
@@ -58,7 +111,7 @@ export default function WiderEditProfilePage() {
               </Avatar>
               <div className="space-y-2">
                 <h3 className="text-lg font-medium">Profile Picture</h3>
-                <Button type="button" variant="outline">Change Avatar</Button>
+                <input type="file" accept="image/*" onChange={handleFileChange} />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-6">
@@ -111,6 +164,7 @@ export default function WiderEditProfilePage() {
           </CardFooter>
         </form>
       </Card>
+      <Toaster />
     </div>
-  )
+  );
 }
